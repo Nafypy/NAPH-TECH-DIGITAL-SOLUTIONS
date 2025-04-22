@@ -13,7 +13,7 @@
       justify-content: center;
     }
     .form-container {
-      background: white;
+      background: aqua;
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -105,7 +105,7 @@
       const notes = document.getElementById('notes').value;
 
       const message = `*Gas Refill Order*\n\nName: ${name}\nAddress: ${address}\nPhone: ${phone}\nCylinder Size: ${cylinder}\nQuantity: ${quantity}\nNotes: ${notes}`;
-      const phoneNumber = '0790053384'; // Replace with your business WhatsApp number (no + or spaces)
+      const phoneNumber = '0799409073'; // Replace with your business WhatsApp number (no + or spaces)
       const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
       window.open(whatsappURL, '_blank');
