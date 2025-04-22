@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Order Gas Refill - EasyGas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+    .form-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin: 1rem 0 0.5rem;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 1.5rem;
+      background-color: #16a34a;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #15803d;
+    }
+    #confirmation {
+      margin-top: 1rem;
+      color: green;
+      font-weight: bold;
+      display: none;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Order Gas Refill</h2>
+    <form id="orderForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required>
+
+      <label for="address">Delivery Address</label>
+      <input type="text" id="address" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" required>
+
+      <label for="cylinder">Cylinder Size</label>
+      <select id="cylinder" required>
+        <option value="">--Select Size--</option>
+        <option value="3kg">3kg</option>
+        <option value="6kg">6kg</option>
+        <option value="12.5kg">13kg</option>
+        <option value="50kg">50kg</option>
+      </select>
+
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" min="1" required>
+
+      <label for="notes">Additional Notes (Optional)</label>
+      <textarea id="notes" rows="3"></textarea>
+
+      <button type="submit">Submit Order</button>
+    </form>
+    <div id="confirmation">✅ Order sent via WhatsApp!</div>
+  </div>
+
+  <script>
+    const form = document.getElementById('orderForm');
+    const confirmation = document.getElementById('confirmation');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const address = document.getElementById('address').value;
+      const phone = document.getElementById('phone').value;
+      const cylinder = document.getElementById('cylinder').value;
+      const quantity = document.getElementById('quantity').value;
+      const notes = document.getElementById('notes').value;
+
+      const message = `*Gas Refill Order*\n\nName: ${name}\nAddress: ${address}\nPhone: ${phone}\nCylinder Size: ${cylinder}\nQuantity: ${quantity}\nNotes: ${notes}`;
+      const phoneNumber = '0790053384'; // Replace with your business WhatsApp number (no + or spaces)
+      const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+      window.open(whatsappURL, '_blank');
+
+      confirmation.style.display = 'block';
+      form.reset();
+    });
+  </script>
+</body>
+</html>
