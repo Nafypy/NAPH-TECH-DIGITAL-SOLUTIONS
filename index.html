@@ -2,38 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Order Gas Refill - EasyGas</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f3f4f6;
+      background-color: aqua;
       margin: 0;
       padding: 2rem;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
     }
-    .form-container {
-      background: aqua;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
       width: 100%;
-      max-width: 500px;
+      max-width: 1200px;
     }
+
+    @media(min-width: 768px) {
+      .container {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    .form-container {
+      background-color: green;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      color: white;
+    }
+
     h2 {
       text-align: center;
       margin-bottom: 1.5rem;
+      color: #fff;
     }
+
     label {
       display: block;
       margin: 1rem 0 0.5rem;
+      font-weight: bold;
     }
+
     input, select, textarea {
       width: 100%;
       padding: 0.75rem;
-      border: 1px solid #ccc;
+      border: 1px solid #d1d5db;
       border-radius: 8px;
+      font-size: 1rem;
+      background-color: #f9fafb;
     }
+
     button {
       width: 100%;
       padding: 0.75rem;
@@ -44,90 +72,199 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
+
     button:hover {
       background-color: #15803d;
     }
+
     #confirmation {
       margin-top: 1rem;
-      color: green;
+      color: #059669;
       font-weight: bold;
       display: none;
       text-align: center;
     }
+
+    .carousel-wrapper {
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-height: 320px;
+      background: white;
+      position: relative;
+    }
+
+    .carousel-track {
+      display: flex;
+      width: max-content;
+      animation: scroll 40s linear infinite;
+    }
+
+    .carousel-track:hover {
+      animation-play-state: paused;
+    }
+
+    .carousel-track img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      flex-shrink: 0;
+      margin-right: 1rem;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Blinking effect for second paragraph */
+    .blinking {
+      color: yellow;
+      font-weight: bold;
+      animation: blink 5s step-start infinite;
+      text-align: center;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* Styling for the second paragraph */
+    .black-background {
+      background-color: black;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* Footer styling */
+    footer {
+      width: 100%;
+      background-color: #1f2937;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      font-size: 1rem;
+      border-top: 5px solid #16a34a;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Order Gas Refill</h2>
-    <form id="orderForm">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" required>
 
-      <label for="address">Delivery Address</label>
-      <input type="text" id="address" required>
+  <div class="container">
+    <!-- Order Form -->
+    <div class="form-container">
+      <h2>Order Gas Refill Or Complete Purchase</h2>
+      <form id="orderForm">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" required />
 
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" required>
+        <label for="address">Delivery Address</label>
+        <input type="text" id="address" required />
 
-      <label for="cylinder">Cylinder Size</label>
-      <select id="cylinder" required>
-        <option value="">--Select Size--</option>
-        <option value="6kg">6kg</option>
-        <option value="13kg">13kg</option>
-        <option value="50kg">50kg</option>
-      </select>
-      <label for="cylinder type">cylinder type</label>
-      <select id="type" required>
-        <option value="">--Select cylinder type</option>
-        <option value="Mengas">Mengas</option>
-        <option value="Progas">Progas</option>
-        <option value="Kgas">Kgas</option>
-        <option value="Total">Total</option>
-        <option value="Powergas">Powergas</option>
-        <option value="Oilibya">Oilibya</option>
-        <option value="Top gas">Top gas</option>
-        <option value="key gas">Key gas</option>
-        <option value="National">National</option>
-        <option value="Afrigas">Afrigas</option>
-        <option value="City gas">City gas</option>
-        <option value="Hass">Hass</option>
-        <option value="Hashi">Hashi</option>
-      </select>
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" required />
 
-      <label for="quantity">Quantity</label>
-      <input type="number" id="quantity" min="1" required>
+        <label for="cylinder">Cylinder Size</label>
+        <select id="cylinder" required>
+          <option value="">-- Select Size --</option>
+          <option value="6kg">6kg</option>
+          <option value="13kg">13kg</option>
+          <option value="50kg">50kg</option>
+        </select>
 
-      <label for="notes">Additional Notes (Optional)</label>
-      <textarea id="notes" rows="3"></textarea>
+        <label for="type">Cylinder Brand</label>
+        <select id="type" required>
+          <option value="">-- Select Brand --</option>
+          <option value="Mengas">Mengas</option>
+          <option value="Progas">Progas</option>
+          <option value="Kgas">Kgas</option>
+          <option value="Total">Total</option>
+          <option value="Powergas">Powergas</option>
+          <option value="Oilibya">Oilibya</option>
+          <option value="Top Gas">Top Gas</option>
+          <option value="Key Gas">Key Gas</option>
+          <option value="National">National</option>
+          <option value="Afrigas">Afrigas</option>
+          <option value="City Gas">City Gas</option>
+          <option value="Hass">Hass</option>
+          <option value="Hashi">Hashi</option>
+        </select>
 
-      <button type="submit">Submit Order</button>
-    </form>
-    <div id="confirmation">✅ Order sent via WhatsApp!</div>
-  </div>
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" min="1" required />
+
+        <label for="notes">Additional Notes (Optional)</label>
+        <textarea id="notes" rows="3"></textarea>
+
+        <button type="submit">Submit Order</button>
+      </form>
+      <div id="confirmation">✅ Order sent via WhatsApp!</div>
+    </div>
+
+    <!-- Carousel Images -->
+    <div class="carousel-wrapper">
+      <div class="carousel-track">
+        <img src="13kg k-gas.jpg" alt="kgas" />
+        <img src="oilibya gas.jpg" alt="oilibya" />
+        <img src="mengas 13kg.jpg" alt="mengas" />
+        <img src="pro.jpg" alt="progas" />
+        <img src="grill.jpg" alt="grill" />
+        <img src="total gas.jpg" alt="total" />
+        <img src="total2.jpg" alt="total again" />
+        <img src="afrigas.jpg" alt="afrigas" />
+        <img src="mengas 6kg.jpg" alt="mengas 6kg" />
+        <img src="grill.jpg" alt="grill repeat" />
+        <!-- Duplicate for smooth looping -->
+        <img src="13kg k-gas.jpg" alt="kgas" />
+        <img src="oilibya gas.jpg" alt="oilibya" />
+        <img src="mengas 13kg.jpg" alt="mengas" />
+        <img src="pro.jpg" alt="progas" />
+        <img src="grill.jpg" alt="grill" />
+        <img src="total gas.jpg" alt="total" />
+        <img src="total2.jpg" alt="total again" />
+        <img src="afrigas.jpg" alt="afrigas" />
+        <img src="mengas 6kg.jpg" alt="mengas 6kg" />
+        <img src="grill.jpg" alt="grill repeat" />
+      </div>
+    </div>
+  </div><br><br>
+  
+  <p>Welcome to NAPH-TECH DIGITAL SOLUTIONS: Your trusted partner in energy solutions</p>
+  <p class="black-background blinking">Need gas? We’ve got you covered! Refills and accessories delivered fast and free.</p>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 NAPH-TECH DIGITAL SOLUTIONS. All rights reserved.
+  </footer>
 
   <script>
-    const form = document.getElementById('orderForm');
-    const confirmation = document.getElementById('confirmation');
-
-    form.addEventListener('submit', function(e) {
+    document.getElementById('orderForm').addEventListener('submit', function (e) {
       e.preventDefault();
 
-      const name = document.getElementById('name').value;
-      const address = document.getElementById('address').value;
-      const phone = document.getElementById('phone').value;
+      const name = document.getElementById('name').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const phone = document.getElementById('phone').value.trim();
       const cylinder = document.getElementById('cylinder').value;
+      const type = document.getElementById('type').value;
       const quantity = document.getElementById('quantity').value;
-      const notes = document.getElementById('notes').value;
+      const notes = document.getElementById('notes').value.trim();
 
-      const message = `*Gas Refill Order*\n\nName: ${name}\nAddress: ${address}\nPhone: ${phone}\nCylinder Size: ${cylinder}\nQuantity: ${quantity}\nNotes: ${notes}`;
-      const phoneNumber = '254799409073'; // Replace with your business WhatsApp number (no + or spaces)
+      const message = `*Gas Refill Order*\n\nName: ${name}\nAddress: ${address}\nPhone: ${phone}\nCylinder Size: ${cylinder}\nBrand: ${type}\nQuantity: ${quantity}\nNotes: ${notes || 'N/A'}`;
+      const phoneNumber = '254799409073';
       const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
       window.open(whatsappURL, '_blank');
-
-      confirmation.style.display = 'block';
-      form.reset();
+      document.getElementById('confirmation').style.display = 'block';
+      this.reset();
     });
   </script>
 </body>
