@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Order Gas Refill - EasyGas</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
@@ -34,13 +34,13 @@
       background-color: #fff;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       margin: 1rem 0;
+      position: relative;
     }
 
     .carousel-track {
       display: flex;
-      gap: 1rem;
-      padding: 1rem;
-      animation: scroll 30s linear infinite;
+      width: max-content;
+      animation: scroll 40s linear infinite;
     }
 
     .carousel-track img {
@@ -53,8 +53,12 @@
     }
 
     @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     .black-background {
@@ -229,7 +233,7 @@
   </footer>
 
   <script>
-    // Double the carousel images for seamless scroll
+    // Duplicate the carousel images for seamless scroll
     const track = document.getElementById('carousel-track');
     track.innerHTML += track.innerHTML;
 
