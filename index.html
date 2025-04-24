@@ -30,39 +30,44 @@
 
     .carousel-wrapper {
       overflow: hidden;
-      border-radius: 0;
       width: 100%;
-      max-height: 240px;
-      position: relative;
       background-color: #fff;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      margin-top: 1rem;
+      margin: 1rem 0;
     }
 
     .carousel-track {
       display: flex;
-      animation: scroll 12s linear infinite;
       gap: 1rem;
       padding: 1rem;
-    }
-
-    .carousel-track:hover {
-      animation-play-state: paused;
+      animation: scroll 30s linear infinite;
     }
 
     .carousel-track img {
-      height: 200px;
+      height: 180px;
       width: auto;
-      max-width: 250px;
       object-fit: cover;
-      flex-shrink: 0;
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     @keyframes scroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
+    }
+
+    .black-background {
+      background-color: #111;
+      color: yellow;
+      text-align: center;
+      font-weight: bold;
+      padding: 1rem;
+      animation: blink 40s step-start infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
     }
 
     .container {
@@ -122,19 +127,6 @@
       text-align: center;
     }
 
-    .black-background {
-      background-color: #111;
-      color: yellow;
-      text-align: center;
-      font-weight: bold;
-      padding: 1rem;
-      animation: blink 40s step-start infinite;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-
     footer {
       margin-top: 3rem;
       background-color: #1f2937;
@@ -147,8 +139,7 @@
 
     @media (max-width: 768px) {
       .carousel-track img {
-        height: 150px;
-        max-width: 180px;
+        height: 120px;
       }
 
       .container {
@@ -164,9 +155,9 @@
     NAPH-TECH DIGITAL SOLUTIONS
   </header>
 
-  <!-- Image Carousel at Top -->
+  <!-- Carousel -->
   <div class="carousel-wrapper">
-    <div class="carousel-track">
+    <div class="carousel-track" id="carousel-track">
       <img src="13kg k-gas.jpg" alt="kgas" />
       <img src="oilibya gas.jpg" alt="oilibya" />
       <img src="mengas 13kg.jpg" alt="mengas" />
@@ -177,18 +168,13 @@
       <img src="afrigas.jpg" alt="afrigas" />
       <img src="mengas 6kg.jpg" alt="mengas 6kg" />
       <img src="grill.jpg" alt="grill repeat" />
-      <!-- Repeat for smooth loop -->
-      <img src="13kg k-gas.jpg" alt="kgas" />
-      <img src="oilibya gas.jpg" alt="oilibya" />
-      <img src="mengas 13kg.jpg" alt="mengas" />
-      <img src="pro.jpg" alt="progas" />
     </div>
   </div>
 
-  <!-- Blinking Callout -->
+  <!-- Blinking Banner -->
   <p class="black-background">Need gas? We’ve got you covered! Refills and accessories delivered fast and free.</p>
 
-  <!-- Form Container Below -->
+  <!-- Order Form -->
   <div class="container">
     <h2>Order Gas Refill Or Purchase</h2>
     <form id="orderForm">
@@ -238,12 +224,16 @@
     <div id="confirmation">✅ Order sent via Whatsapp</div>
   </div>
 
-  <!-- Footer -->
   <footer>
     &copy; 2025 NAPH-TECH DIGITAL SOLUTIONS. All rights reserved.
   </footer>
 
   <script>
+    // Double the carousel images for seamless scroll
+    const track = document.getElementById('carousel-track');
+    track.innerHTML += track.innerHTML;
+
+    // WhatsApp order script
     document.getElementById('orderForm').addEventListener('submit', function (e) {
       e.preventDefault();
 
